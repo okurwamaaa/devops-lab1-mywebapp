@@ -3,6 +3,7 @@ import sys
 from unittest.mock import patch, MagicMock
 import pytest
 
+# flake8: noqa: E402
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
 
