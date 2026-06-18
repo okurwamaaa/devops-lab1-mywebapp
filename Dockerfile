@@ -3,8 +3,8 @@ FROM python:3.12-slim
 WORKDIR /opt/mywebapp
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev=18.4-0ubuntu0.26.04.1 \
-    gcc=4:15.2.0-5ubuntu1 \
+    libpq-dev \
+    gcc \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
