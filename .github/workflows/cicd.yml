@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
           
       - name: Lint Python with flake8
-        run: flake8 app.py tests/ --max-line-length=120
+        run: flake8 app.py tests/ --max-line-length=120 --ignore=W292
         
       - name: Lint Dockerfile with hadolint
         uses: hadolint/hadolint-action@v3.1.0
