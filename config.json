@@ -1,0 +1,8 @@
+{
+    "db_host": "127.0.0.1",
+    "db_port": 5432,
+    "db_name": "inventory_db",
+    "db_user": "app",
+    "db_password": "123",
+    "app_port": 5200
+}

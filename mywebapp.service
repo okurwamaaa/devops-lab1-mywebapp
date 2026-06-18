@@ -1,0 +1,17 @@
+[Unit]
+Description=My Web App (Simple Inventory Service)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=app
+Group=app
+WorkingDirectory=/opt/mywebapp
+# Виконуємо міграцію бази даних перед запуском застосунку
+ExecStartPre=/usr/bin/python3 /opt/mywebapp/migrate.py
+# Запуск самого застосунку
+ExecStart=/usr/bin/python3 /opt/mywebapp/app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
