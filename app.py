@@ -102,7 +102,6 @@ def items():
                 (name, quantity)
             )
             new_id = cur.fetchone()[0]
-            conn.create_revision_window()
             conn.commit()
             cur.close()
             conn.close()
@@ -123,4 +122,12 @@ def get_item(item_id):
 
         if row:
             item_data = {"id": row[0], "name": row[1], "quantity": row[2], "created_at": str(row[3])}
-            return render_response(item_data, None, f
+            return render_response(item_data, None, f"Item Details: {item_id}")
+        return "Item not found", 404
+    except Exception as e:
+        return str(e), 500
+
+
+if __name__ == '__main__':
+    port = config.get('app_port', 5200)
+    app.run(host='0.0.0.0', port=port)

@@ -1,11 +1,11 @@
-import pytest
-from unittest.mock import patch, MagicMock
-import sys
 import os
+import sys
+from unittest.mock import patch, MagicMock
+import pytest
 
-# Додаємо кореневу папку для імпорту нашого app.py
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from app import app
+
 
 @pytest.fixture
 def client():
@@ -13,10 +13,12 @@ def client():
     with app.test_client() as client:
         yield client
 
+
 def test_health_alive(client):
     rv = client.get('/health/alive')
     assert rv.status_code == 200
     assert b'OK' in rv.data
+
 
 @patch('app.get_db_connection')
 def test_health_ready_success(mock_get_db, client):
@@ -25,10 +27,12 @@ def test_health_ready_success(mock_get_db, client):
     rv = client.get('/health/ready')
     assert rv.status_code == 200
 
+
 def test_index_html(client):
     rv = client.get('/', headers={'Accept': 'text/html'})
     assert rv.status_code == 200
     assert b'mywebapp API Endpoints' in rv.data
+
 
 @patch('app.get_db_connection')
 def test_get_items(mock_get_db, client):
