@@ -1,0 +1,15 @@
+[Unit]
+Description=My Web App Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker stop mywebapp-prod
+ExecStartPre=-/usr/bin/docker rm mywebapp-prod
+# Запускаємо контейнер з нашого GitHub Registry
+ExecStart=/usr/bin/docker run --name mywebapp-prod --network backend_network -p 5200:5200 ghcr.io/okurwamaaa/devops-lab1-mywebapp:latest
+ExecStop=/usr/bin/docker stop mywebapp-prod
+
+[Install]
+WantedBy=multi-user.target
